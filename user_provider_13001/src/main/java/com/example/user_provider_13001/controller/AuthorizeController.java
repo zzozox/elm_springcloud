@@ -6,7 +6,10 @@ import com.example.user_provider_13001.entity.vo.UpdataAccountVo;
 import com.example.user_provider_13001.entity.vo.request.ConfirmResetVO;
 import com.example.user_provider_13001.entity.vo.request.EmailRegisterVO;
 import com.example.user_provider_13001.entity.vo.request.EmailResetVO;
+import com.example.user_provider_13001.entity.vo.request.LoginRequest;
+import com.example.user_provider_13001.entity.vo.response.AuthorizeVO;
 import com.example.user_provider_13001.service.AccountService;
+import com.example.user_provider_13001.utils.JwtUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -14,10 +17,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.function.Supplier;
+
 
 /**
  * 用于验证相关Controller包含用户的注册、重置密码等操作
@@ -28,9 +38,50 @@ import java.util.function.Supplier;
 @Tag(name = "登录校验相关", description = "包括用户登录、注册、验证码请求等操作。")
 public class AuthorizeController {
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @Resource
     AccountService accountService;
 
+    @Resource
+    JwtUtils jwtUtils;
+
+    @PostMapping("/login")
+    @Operation(summary = "用户登录")
+    public RestBean<AuthorizeVO> login(@RequestBody @Valid LoginRequest loginRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequest.getUsername(),
+                            loginRequest.getPassword()
+                    )
+            );
+
+            User user = (User) authentication.getPrincipal();
+            Account account = accountService.findAccountByNameOrEmail(user.getUsername());
+            String jwt = jwtUtils.createJwt(user, account.getUsername(), account.getUserId());
+            if (jwt == null) {
+                return RestBean.forbidden("登录验证频繁，请稍后再试");
+            } else {
+                AuthorizeVO vo = account.asViewObject(AuthorizeVO.class, o -> o.setToken(jwt));
+                vo.setExpire(jwtUtils.expireTime());
+                return RestBean.success(vo);
+            }
+        } catch (AuthenticationException e) {
+            return RestBean.forbidden("用户名或密码错误");
+        }
+    }
+
+    @PostMapping("/logout")
+    @Operation(summary = "用户退出登录")
+    public String logout(@RequestHeader("Authorization") String authorization) {
+        if (jwtUtils.invalidateJwt(authorization)) {
+            return "退出登录成功";
+        } else {
+            return "退出登录失败";
+        }
+    }
     /**
      * 请求邮件验证码
      * @param email 请求邮件

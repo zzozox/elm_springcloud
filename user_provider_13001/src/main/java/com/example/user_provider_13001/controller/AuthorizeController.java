@@ -40,11 +40,10 @@ public class AuthorizeController {
      */
     @GetMapping("/ask-code")
     @Operation(summary = "请求邮件验证码")
-    public RestBean<Void> askVerifyCode(@RequestParam @Email String email,
+    public String askVerifyCode(@RequestParam @Email String email,
                                         @RequestParam @Pattern(regexp = "(register|reset)")  String type,
                                         HttpServletRequest request){
-        return this.messageHandle(() ->
-                accountService.registerEmailVerifyCode(type, String.valueOf(email), request.getRemoteAddr()));
+        return accountService.registerEmailVerifyCode(type, String.valueOf(email), request.getRemoteAddr());
     }
 
     /**
@@ -54,9 +53,8 @@ public class AuthorizeController {
      */
     @PostMapping("/register")
     @Operation(summary = "用户注册操作")
-    public RestBean<Void> register(@RequestBody @Valid EmailRegisterVO vo){
-        return this.messageHandle(() ->
-                accountService.registerEmailAccount(vo));
+    public String register(@RequestBody @Valid EmailRegisterVO vo){
+        return accountService.registerEmailAccount(vo);
     }
 
     /**
@@ -66,8 +64,8 @@ public class AuthorizeController {
      */
     @PostMapping("/reset-confirm")
     @Operation(summary = "密码重置确认")
-    public RestBean<Void> resetConfirm(@RequestBody @Valid ConfirmResetVO vo){
-        return this.messageHandle(() -> accountService.resetConfirm(vo));
+    public String resetConfirm(@RequestBody @Valid ConfirmResetVO vo){
+        return accountService.resetConfirm(vo);
     }
 
     /**
@@ -77,9 +75,8 @@ public class AuthorizeController {
      */
     @PostMapping("/reset-password")
     @Operation(summary = "密码重置操作")
-    public RestBean<Void> resetPassword(@RequestBody @Valid EmailResetVO vo){
-        return this.messageHandle(() ->
-                accountService.resetEmailAccountPassword(vo));
+    public String resetPassword(@RequestBody @Valid EmailResetVO vo){
+        return accountService.resetEmailAccountPassword(vo);
     }
     /**
      * 根据用户id查询用户信息
@@ -87,8 +84,8 @@ public class AuthorizeController {
      * @return
      */
     @PostMapping("/index/{userId}")
-    public RestBean<Account> getUserById(@PathVariable Integer userId){
-        return RestBean.success(accountService.findAccountById(userId));
+    public Account getUserById(@PathVariable Integer userId){
+        return accountService.findAccountById(userId);
     }
 
     /**
@@ -97,9 +94,8 @@ public class AuthorizeController {
      * @return
      */
     @PostMapping("/updateUser")
-    public RestBean<Void> updateUser(@RequestBody @Valid UpdataAccountVo vo){
-        return  this.messageHandle(() ->
-                accountService.updateAccount(vo));
+    public String updateUser(@RequestBody @Valid UpdataAccountVo vo){
+        return accountService.updateAccount(vo);
     }
     /**
      * 针对于返回值为String作为错误信息的方法进行统一处理

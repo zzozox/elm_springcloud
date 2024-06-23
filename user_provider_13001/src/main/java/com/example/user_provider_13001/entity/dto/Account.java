@@ -34,7 +34,7 @@ public class Account implements BaseData {
     @TableField("role")
     private String role;
     //用户注册时间
-    @TableField("register_time")
+    @TableField("registerTime")
     private Date registerTime;
     //用户性别
     @TableField("userSex")

@@ -2,8 +2,12 @@ package com.example.gateway_13200;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@EnableDiscoveryClient
+@ComponentScan(basePackages = {"com.example.gateway_13200", "com.example.common"})
 public class Gateway13200Application {
 
     public static void main(String[] args) {

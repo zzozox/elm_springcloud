@@ -1,18 +1,15 @@
 package com.example.user_provider_13001;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-@SpringBootTest
-class UserProvider13001ApplicationTests {
-
+public class openredis {
     @Test
-    void openRedis() {
+    void test(){
         try {
             // 设置工作目录
             String workingDirectory = "D:\\Java\\redis-7.0.14\\bin";
@@ -47,5 +44,4 @@ class UserProvider13001ApplicationTests {
             e.printStackTrace();
         }
     }
-
 }

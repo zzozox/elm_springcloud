@@ -1,6 +1,6 @@
 package com.example.user_provider_13001.controller.exception;
 
-import com.example.user_provider_13001.entity.RestBean;
+import com.example.common.entity.RestBean;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
 import org.springframework.boot.web.error.ErrorAttributeOptions;

@@ -1,15 +1,15 @@
 package com.example.user_provider_13001.controller;
 
-import com.example.user_provider_13001.entity.RestBean;
-import com.example.user_provider_13001.entity.dto.Account;
-import com.example.user_provider_13001.entity.vo.UpdataAccountVo;
-import com.example.user_provider_13001.entity.vo.request.ConfirmResetVO;
-import com.example.user_provider_13001.entity.vo.request.EmailRegisterVO;
-import com.example.user_provider_13001.entity.vo.request.EmailResetVO;
-import com.example.user_provider_13001.entity.vo.request.LoginRequest;
-import com.example.user_provider_13001.entity.vo.response.AuthorizeVO;
+import com.example.common.entity.RestBean;
+import com.example.common.entity.dto.Account;
+import com.example.common.entity.vo.UpdataAccountVo;
+import com.example.common.entity.vo.request.ConfirmResetVO;
+import com.example.common.entity.vo.request.EmailRegisterVO;
+import com.example.common.entity.vo.request.EmailResetVO;
+import com.example.common.entity.vo.request.LoginRequest;
+import com.example.common.entity.vo.response.AuthorizeVO;
+import com.example.common.utils.JwtUtils;
 import com.example.user_provider_13001.service.AccountService;
-import com.example.user_provider_13001.utils.JwtUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;

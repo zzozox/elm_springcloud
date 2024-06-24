@@ -4,16 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.user_provider_13001.entity.dto.Account;
-import com.example.user_provider_13001.entity.vo.UpdataAccountVo;
-import com.example.user_provider_13001.entity.vo.request.ConfirmResetVO;
-import com.example.user_provider_13001.entity.vo.request.EmailRegisterVO;
-import com.example.user_provider_13001.entity.vo.request.EmailResetVO;
+import com.example.common.entity.dto.Account;
+import com.example.common.entity.vo.UpdataAccountVo;
+import com.example.common.entity.vo.request.ConfirmResetVO;
+import com.example.common.entity.vo.request.EmailRegisterVO;
+import com.example.common.entity.vo.request.EmailResetVO;
+import com.example.common.utils.Const;
+import com.example.common.utils.FlowUtils;
 import com.example.user_provider_13001.mapper.AccountMapper;
 import com.example.user_provider_13001.service.AccountService;
-import com.example.user_provider_13001.utils.Const;
-import com.example.user_provider_13001.utils.FlowUtils;
 import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -97,7 +98,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
      * @param info 注册基本信息
      * @return 操作结果，null表示正常，否则为错误原因
      */
-    public String registerEmailAccount(EmailRegisterVO info){
+    public String registerEmailAccount(@Valid EmailRegisterVO info){
         String email = info.getEmail();
         String code = this.getEmailVerifyCode(email);
         if(code == null) return "请先获取验证码";
@@ -122,7 +123,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
      * @return 操作结果，null表示正常，否则为错误原因
      */
     @Override
-    public String resetEmailAccountPassword(EmailResetVO info) {
+    public String resetEmailAccountPassword(@Valid EmailResetVO info) {
         String verify = resetConfirm(new ConfirmResetVO(info.getEmail(), info.getCode()));
         if(verify != null) return verify;
         String email = info.getEmail();
@@ -140,7 +141,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
      * @return 操作结果，null表示正常，否则为错误原因
      */
     @Override
-    public String resetConfirm(ConfirmResetVO info) {
+    public String resetConfirm(@Valid ConfirmResetVO info) {
         String email = info.getEmail();
         String code = this.getEmailVerifyCode(email);
         if(code == null) return "请先获取验证码";
@@ -179,6 +180,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
 
     /**
      * 通过用户名或邮件地址查找用户
+     *
      * @param text 用户名或邮件
      * @return 账户实体
      */
@@ -223,7 +225,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
      * @return
      */
     @Override
-    public String updateAccount(UpdataAccountVo updataAccountVo) {
+    public String updateAccount(@Valid UpdataAccountVo updataAccountVo) {
         UpdateWrapper<Account> accountUpdateWrapper=new UpdateWrapper<>();
         accountUpdateWrapper.eq("userId",updataAccountVo.getUserId())
                 .set("username",updataAccountVo.getUsername())

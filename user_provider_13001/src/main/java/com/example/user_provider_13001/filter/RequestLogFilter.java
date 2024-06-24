@@ -1,8 +1,8 @@
 package com.example.user_provider_13001.filter;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.example.user_provider_13001.utils.Const;
-import com.example.user_provider_13001.utils.SnowflakeIdGenerator;
+import com.example.common.utils.Const;
+import com.example.common.utils.SnowflakeIdGenerator;
 import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

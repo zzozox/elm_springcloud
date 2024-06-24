@@ -1,8 +1,8 @@
 package com.example.user_provider_13001.filter;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.user_provider_13001.utils.Const;
-import com.example.user_provider_13001.utils.JwtUtils;
+import com.example.common.utils.Const;
+import com.example.common.utils.JwtUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

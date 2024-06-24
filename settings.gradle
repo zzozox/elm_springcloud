@@ -1,1 +1,4 @@
 rootProject.name = 'elm_springcloud'
+include 'common'
+include 'user_provider_13001'
+

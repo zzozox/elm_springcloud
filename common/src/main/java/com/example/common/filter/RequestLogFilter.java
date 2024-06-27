@@ -1,4 +1,4 @@
-package com.example.user_consumer_13002.filter;
+package com.example.common.filter;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.example.common.utils.Const;

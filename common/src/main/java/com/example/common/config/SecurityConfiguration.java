@@ -1,6 +1,6 @@
-package com.example.user_consumer_13002.config;
+package com.example.common.config;
 
-import com.example.user_consumer_13002.filter.JwtAuthenticationFilter;
+import com.example.common.filter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

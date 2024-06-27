@@ -1,4 +1,4 @@
-package com.example.user_provider_13001.config;
+package com.example.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

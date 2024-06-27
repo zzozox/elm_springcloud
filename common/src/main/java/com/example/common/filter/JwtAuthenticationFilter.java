@@ -1,4 +1,4 @@
-package com.example.user_provider_13001.filter;
+package com.example.common.filter;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.common.utils.Const;

@@ -1,4 +1,4 @@
-package com.example.user_consumer_13002.filter;
+package com.example.common.filter;
 
 import com.example.common.utils.Const;
 import jakarta.servlet.FilterChain;

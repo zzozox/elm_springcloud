@@ -1,4 +1,4 @@
-package com.example.user_provider_13001.listener;
+package com.example.common.listener;
 
 import jakarta.annotation.Resource;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackages = {"com.example.gateway_13200", "com.example.common"})
+//@ComponentScan(basePackages = {"com.example.gateway_13200", "com.example.common"})
 public class Gateway13200Application {
 
     public static void main(String[] args) {

@@ -45,9 +45,6 @@ public class Food implements BaseData {
     //所属商家编号
     @TableField("businessId")
     private Integer businessId;
-    //食品数量
-    @TableField("quantity")
-    private Integer quantity;
     //食品创建时间
     @TableField("createTime")
     private Date createTime;

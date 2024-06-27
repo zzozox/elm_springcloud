@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="D:/Maven/apache-maven-3.9.0-bin/apache-maven-3.9.0/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="elm_springcloud.orderdetailet_provider_13013.main" />
+        <module name="elm_springcloud.user_provider_13001.main" />
+        <module name="elm_springcloud.cart_provider_13009.main" />
+        <module name="elm_springcloud.food_provider_13005.main" />
+        <module name="elm_springcloud.order_provider_13011.main" />
+        <module name="elm_springcloud.deliveryaddress_provider_13007.main" />
+        <module name="elm_springcloud.common.main" />
+        <module name="elm_springcloud.business_provider_13003.main" />
+        <module name="elm_springcloud.user_consumer_13002.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="17" />
+  </component>
+</project>

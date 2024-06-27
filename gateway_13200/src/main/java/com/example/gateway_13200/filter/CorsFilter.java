@@ -1,6 +1,5 @@
 package com.example.gateway_13200.filter;
 
-import com.example.common.utils.Const;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpFilter;
@@ -16,7 +15,6 @@ import java.io.IOException;
  * 跨域配置过滤器，仅处理跨域，添加跨域响应头
  */
 @Component
-@Order(Const.ORDER_CORS)
 public class CorsFilter extends HttpFilter {
 
     @Value("${spring.web.cors.origin}")

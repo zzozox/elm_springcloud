@@ -38,7 +38,4 @@ public class Cart implements BaseData {
     //同一类型食品的购买数量
     @TableField("quantity")
     private Integer quantity;
-    //删除标记（1：正常； 0：删除）
-    @TableField("delTag")
-    private Integer delTag;
 }

@@ -2,6 +2,7 @@ package com.example.business_provider_13003;
 
 import com.example.business_provider_13003.service.BusinessService;
 import com.example.common.entity.vo.request.business.BusinessVo;
+import com.example.common.utils.JwtUtils;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,5 +25,8 @@ public class businessServiceTest {
         businessVo.setStarPrice(BigDecimal.valueOf(15.00));
         businessVo.setDeliveryPrice(BigDecimal.valueOf(3.00));
         businessService.createBusiness(businessVo);
+    }
+    @Test
+    void createJWTTest(){
     }
 }

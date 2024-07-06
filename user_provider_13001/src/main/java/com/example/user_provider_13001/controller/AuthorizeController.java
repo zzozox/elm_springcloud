@@ -135,6 +135,7 @@ public class AuthorizeController {
      * @return
      */
     @PostMapping("/index/{userId}")
+    @Operation(summary = "获取用户信息")
     public RestBean<Account> getUserById(@PathVariable Integer userId){
         return RestBean.success(accountService.findAccountById(userId));
     }
@@ -145,6 +146,7 @@ public class AuthorizeController {
      * @return
      */
     @PostMapping("/updateUser")
+    @Operation(summary = "修改用户信息")
     public RestBean<Void> updateUser(@RequestBody @Valid UpdataAccountVo vo){
         return  this.messageHandle(() ->
                 accountService.updateAccount(vo));

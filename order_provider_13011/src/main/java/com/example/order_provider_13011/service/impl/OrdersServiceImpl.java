@@ -93,7 +93,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     @Override
     public List<Orders> listOrdersByUserId(Integer userId) {
         QueryWrapper<Orders> ordersQueryWrapper=new QueryWrapper<>();
-        ordersQueryWrapper.eq("userId",userId);
+        ordersQueryWrapper
+                .eq("userId",userId)
+                .eq("delTag",1);
         return ordersMapper.selectList(ordersQueryWrapper);
     }
 }

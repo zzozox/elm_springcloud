@@ -33,7 +33,9 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
      */
     @Override
     public List<Business> getAllBusinesses() {
-        return businessMapper.selectList(null);
+        QueryWrapper<Business> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("delTag",1);
+        return businessMapper.selectList(queryWrapper);
     }
     /**
      * mybatisPlus-QueryWrapper多条件查询
@@ -44,7 +46,9 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
     @Override
     public List<Business> listBusinessesByOrderTypeId(Integer orderTypeId) {
         QueryWrapper<Business> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("orderTypeId", orderTypeId);
+        queryWrapper
+                .eq("orderTypeId", orderTypeId)
+                .eq("delTag",1);
         return businessMapper.selectList(queryWrapper);
     }
     /**

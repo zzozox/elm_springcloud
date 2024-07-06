@@ -4,7 +4,12 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/elm_springcloud.business_provider_13003.main.iml" filepath="$PROJECT_DIR$/.idea/modules/elm_springcloud.business_provider_13003.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1743524184/elm_springcloud.cart_provider_13009.main.iml" filepath="$PROJECT_DIR$/.idea/modules/1743524184/elm_springcloud.cart_provider_13009.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-888709477/elm_springcloud.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-888709477/elm_springcloud.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1582705066/elm_springcloud.deliveryaddress_provider_13007.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-1582705066/elm_springcloud.deliveryaddress_provider_13007.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2050352042/elm_springcloud.food_provider_13005.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-2050352042/elm_springcloud.food_provider_13005.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-309019935/elm_springcloud.order_provider_13011.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-309019935/elm_springcloud.order_provider_13011.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/823036963/elm_springcloud.orderdetailet_provider_13013.main.iml" filepath="$PROJECT_DIR$/.idea/modules/823036963/elm_springcloud.orderdetailet_provider_13013.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1947335563/elm_springcloud.user_consumer_13002.main.iml" filepath="$PROJECT_DIR$/.idea/modules/1947335563/elm_springcloud.user_consumer_13002.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/elm_springcloud.user_provider_13001.main.iml" filepath="$PROJECT_DIR$/.idea/modules/elm_springcloud.user_provider_13001.main.iml" />
     </modules>

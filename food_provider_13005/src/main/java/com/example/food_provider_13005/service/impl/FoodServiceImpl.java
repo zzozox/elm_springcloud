@@ -35,7 +35,9 @@ public class FoodServiceImpl extends ServiceImpl<FoodMapper, Food> implements Fo
     @Override
     public List<Food> listFoodByBusinessId(Integer businessId) {
         QueryWrapper<Food> foodQueryWrapper=new QueryWrapper<>();
-        foodQueryWrapper.eq("businessId",businessId);
+        foodQueryWrapper
+                .eq("businessId",businessId)
+                .eq("delTag",1);
         return foodMapper.selectList(foodQueryWrapper);
     }
 

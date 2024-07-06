@@ -35,7 +35,9 @@ public class DeliveryAddressServiceImpl extends ServiceImpl<DeliveryAddressMappe
     @Override
     public List<DeliveryAddress> listDeliveryAddressByUserId(Integer userId) {
         QueryWrapper<DeliveryAddress> queryWrapper=new QueryWrapper<>();
-        queryWrapper.eq("userId",userId);
+        queryWrapper
+                .eq("userId",userId)
+                .eq("delTag",1);
         return deliveryAddressMapper.selectList(queryWrapper);
     }
 

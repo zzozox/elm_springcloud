@@ -7,7 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackages = {"com.example.order_provider_13011", "com.example.common"})
+@ComponentScan(basePackages = {
+        "com.example.order_provider_13011",
+        "com.example.cart_provider_13009",
+        "com.example.orderdetailet_provider_13013",
+        "com.example.common"})
 public class OrderProvider13011Application {
 
     public static void main(String[] args) {

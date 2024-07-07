@@ -1,4 +1,4 @@
-package com.example.cart_provider_13009.controller.exception;
+package com.example.common.controller.exception;
 
 import com.example.common.entity.RestBean;
 import jakarta.validation.ValidationException;

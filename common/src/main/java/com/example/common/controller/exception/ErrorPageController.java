@@ -1,4 +1,4 @@
-package com.example.deliveryaddress_provider_13007.controller.exception;
+package com.example.common.controller.exception;
 
 import com.example.common.entity.RestBean;
 import jakarta.servlet.http.HttpServletRequest;

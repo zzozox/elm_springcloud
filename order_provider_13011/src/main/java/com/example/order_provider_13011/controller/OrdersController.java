@@ -34,8 +34,8 @@ public class OrdersController {
      * @return
      */
     @PostMapping("/createOrders")
-    public RestBean<Void> createOrders(@RequestBody @Valid OrderVo vo){
-       return this.messageHandle(() ->ordersService.createOrders(vo));
+    public RestBean<Orders> createOrders(@RequestBody @Valid OrderVo vo){
+       return RestBean.success(ordersService.createOrders(vo));
     }
 
     /**
@@ -56,6 +56,16 @@ public class OrdersController {
     @PostMapping("/listOrdersByUserId/{userId}")
     public RestBean<List<Orders>> listOrdersByUserId(@PathVariable Integer userId){
         return RestBean.success(ordersService.listOrdersByUserId(userId));
+    }
+
+    /**
+     * 支付订单
+     * @param orderId
+     * @return
+     */
+    @PostMapping("/payOrder/{orderId}")
+    public RestBean<Void> payOrder(@PathVariable Integer orderId){
+        return this.messageHandle(() ->ordersService.payOrder(orderId));
     }
 
     private <T> RestBean<T> messageHandle(Supplier<String> action){

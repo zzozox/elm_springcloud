@@ -16,8 +16,9 @@ import java.util.List;
  */
 public interface OrdersService extends IService<Orders> {
 
-    String createOrders(OrderVo vo);
+    Orders createOrders(OrderVo vo);
     Orders getOrdersById(Integer orderId);
     List<Orders> listOrdersByUserId(Integer userId);
+    String payOrder(Integer orderId);
 
 }

@@ -1,6 +1,7 @@
 package com.example.order_provider_13011.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cart_provider_13009.mapper.CartMapper;
 import com.example.common.entity.dto.Cart;
@@ -41,7 +42,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
      * @return
      */
     @Override
-    public String createOrders(OrderVo vo) {
+    public Orders createOrders(OrderVo vo) {
+        //0为未支付
+        //1为未删除
         Orders orders=new Orders(
                 null,
                 vo.getUserId(),
@@ -69,9 +72,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
             }
             //订单生成成功后删除购物车记录，即该用户在该商家下的购物车记录
             cartMapper.delete(cartQueryWrapper);
-            return null;
+            return orders;
         }else {
-            return "创建订单失败";
+            return null;
         }
     }
 
@@ -97,5 +100,18 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
                 .eq("userId",userId)
                 .eq("delTag",1);
         return ordersMapper.selectList(ordersQueryWrapper);
+    }
+
+    @Override
+    public String payOrder(Integer orderId) {
+        //1为已支付
+        UpdateWrapper<Orders> ordersUpdateWrapper=new UpdateWrapper<>();
+        ordersUpdateWrapper
+                .eq("orderId",orderId)
+                .set("orderState",1);
+        if (ordersMapper.update(ordersUpdateWrapper)==1){
+            return null;
+        }
+        else return "支付失败";
     }
 }

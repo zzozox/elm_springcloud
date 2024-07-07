@@ -8,7 +8,7 @@ import router from "@/router";
 <!--      <source src="../assets/bg.mp4" type="video/mp4">-->
 <!--      Your browser does not support the video tag.-->
 <!--    </video>-->
-    <img src="src/assets/background.jpg" alt="">
+    <img src="../assets/background.jpg" alt="">
     <button @click="router.push('/index')">Welocome to Eleme</button>
   </div>
 </template>

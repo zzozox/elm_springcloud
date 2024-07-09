@@ -19,6 +19,7 @@ public interface BusinessService extends IService<Business> {
     List<Business> getAllBusinesses();
     List<Business> listBusinessesByOrderTypeId(Integer orderTypeId);
     Business getBusinessById(Integer businessId);
+    List<Business> getBusinessesByUserId(Integer userId);
     String createBusiness(BusinessVo businessVo);
     String deleteBusienss(Integer businessId);
     String updateBusiness(Business business);

@@ -19,4 +19,5 @@ public class EmailRegisterVO {
     String username;
     @Length(min = 6, max = 20)
     String password;
+    private String role;
 }

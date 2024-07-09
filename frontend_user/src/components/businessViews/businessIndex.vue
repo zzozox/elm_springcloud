@@ -1,25 +1,21 @@
 <script setup>
 import { onMounted, onBeforeUnmount, ref, watchEffect } from 'vue';
-import Footer from '../components/Footer.vue';
+import Footer from './businessFooter.vue';
 import router from "@/router";
-import {get} from "@/net";
-import {ArrowDownBold, CaretBottom, DCaret, Search} from "@element-plus/icons-vue";
+import { get, getUser } from "@/net";
+import { ArrowDownBold, CaretBottom, DCaret, Search } from "@element-plus/icons-vue";
 
+const user = ref(null);
 const fixedBox = ref(null);
 const businessArr = ref([]);
 
 const handleScroll = () => {
-  // 获取滚动条位置
   const s1 = document.documentElement.scrollTop;
   const s2 = document.body.scrollTop;
   const scroll = s1 === 0 ? s2 : s1;
-  // 获取视口宽度
   const width = document.documentElement.clientWidth;
-
-  // 获取顶部固定块
   const search = fixedBox.value;
 
-  // 判断滚动条超过视口宽度的12%时，搜索块变固定定位
   if (scroll > width * 0.12) {
     search.style.position = 'fixed';
     search.style.left = '0';
@@ -30,49 +26,41 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+  user.value = getUser();
   document.addEventListener('scroll', handleScroll);
-  get(`/business/list`,
-      (data) => {
-        businessArr.value=data;
-      })
+  get('/business/list', (data) => {
+    businessArr.value = data;
+  });
 });
 
 onBeforeUnmount(() => {
   document.removeEventListener('scroll', handleScroll);
 });
 
-// 使用 watchEffect 监听路由变化，以更新组件状态
-watchEffect(() => {
-  // 当切换到其他组件时，就不需要 document 滚动条事件，所以将此事件去掉
-  document.removeEventListener('scroll', handleScroll);
-});
-
 const toBusinessList = (orderTypeId) => {
-  router.push({ path: '/businessList', query: { orderTypeId } });
+  // router.push({ path: '/businessList', query: { orderTypeId } });
 };
-const toBusinessInfo = (businessId) => {
-  router.push({ path: '/businessInfo', query: { businessId: businessId } });
+
+const toBusinessInfo = (businessId, userId) => {
+  if (user.value && userId === user.value.id) {
+    router.push({ path: '/businessInfoManage', query: { businessId: businessId } });
+  } else {
+    router.push({ path: '/businessInfoLook', query: { businessId: businessId } });
+  }
 };
 
 </script>
+
 <template>
   <div class="wrapper">
-    <!-- header部分 -->
     <header>
       <div class="icon-location-box">
         <div class="icon-location"></div>
       </div>
       <div class="location-text">沈阳市规划大厦<el-icon><ArrowDownBold /></el-icon></div>
     </header>
-    <!-- search部分 -->
-    <!--
-    搜索框部分（此块与search-fixed-top块宽度高度一致，用于当
-    search-fixed-top块固定后，挡住下面块不要窜上去）
-    -->
     <div class="search">
-      <!-- 当滚动条超过上面的定位块时，search-fixed-top块变成固定在顶部。 -->
       <div class="search-fixed-top" ref="fixedBox">
-        <!-- 搜索框部分中间的白框 -->
         <div class="search-box">
           <el-icon><Search /></el-icon>搜索饿了么商家、商品名称
         </div>
@@ -81,56 +69,54 @@ const toBusinessInfo = (businessId) => {
     <!-- 点餐分类部分 -->
     <ul class="foodtype">
       <li @click="toBusinessList(1)">
-        <img src="../assets/img/dcfl01.png">
+        <img src="../../assets/img/dcfl01.png">
         <p>美食</p>
       </li>
       <li @click="toBusinessList(2)">
-        <img src="../assets/img/dcfl02.png">
+        <img src="../../assets/img/dcfl02.png">
         <p>早餐</p>
       </li>
       <li @click="toBusinessList(3)">
-        <img src="../assets/img/dcfl03.png">
+        <img src="../../assets/img/dcfl03.png">
         <p>跑腿代购</p>
       </li>
       <li @click="toBusinessList(4)">
-        <img src="../assets/img/dcfl04.png">
+        <img src="../../assets/img/dcfl04.png">
         <p>汉堡披萨</p>
       </li>
       <li @click="toBusinessList(5)">
-        <img src="../assets/img/dcfl05.png">
+        <img src="../../assets/img/dcfl05.png">
         <p>甜品饮品</p>
       </li>
       <li @click="toBusinessList(6)">
-        <img src="../assets/img/dcfl06.png">
+        <img src="../../assets/img/dcfl06.png">
         <p>速食简餐</p>
       </li>
       <li @click="toBusinessList(7)">
-        <img src="../assets/img/dcfl07.png">
+        <img src="../../assets/img/dcfl07.png">
         <p>地方小吃</p>
       </li>
       <li @click="toBusinessList(8)">
-        <img src="../assets/img/dcfl08.png">
+        <img src="../../assets/img/dcfl08.png">
         <p>米粉面馆</p>
       </li>
       <li @click="toBusinessList(9)">
-        <img src="../assets/img/dcfl09.png">
+        <img src="../../assets/img/dcfl09.png">
         <p>包子粥铺</p>
       </li>
       <li @click="toBusinessList(10)">
-        <img src="../assets/img/dcfl10.png">
+        <img src="../../assets/img/dcfl10.png">
         <p>炸鸡炸串</p>
       </li>
     </ul>
-    <!-- 横幅广告部分（注意：此处有背景图片） -->
     <div class="banner">
       <h3>品质套餐</h3>
       <p>搭配齐全吃得好</p>
       <a>立即抢购 &gt;</a>
     </div>
-    <!-- 超级会员部分 -->
     <div class="supermember">
       <div class="left">
-        <img src="../assets/img/index_banner.png">
+        <img src="../../assets/img/index_banner.png" alt="">
         <h3>超级会员</h3>
         <p>&#8226; 每月享超值权益</p>
       </div>
@@ -138,22 +124,19 @@ const toBusinessInfo = (businessId) => {
         立即开通 &gt;
       </div>
     </div>
-    <!-- 推荐商家部分 -->
     <div class="recommend">
       <div class="recommend-line"></div>
       <p>推荐商家</p>
       <div class="recommend-line"></div>
     </div>
-    <!-- 推荐方式部分 -->
     <ul class="recommendtype">
       <li>综合排序<el-icon><CaretBottom /></el-icon></li>
       <li>距离最近</li>
       <li>销量最高</li>
       <li>筛选<el-icon><DCaret /></el-icon></li>
     </ul>
-    <!-- 推荐商家列表部分 -->
     <ul class="business">
-      <li v-for="item in businessArr" :key="item.businessId" @click="toBusinessInfo(item.businessId)">
+      <li v-for="item in businessArr" :key="item.businessId" @click="toBusinessInfo(item.businessId, item.userId)">
         <img :src="item.businessImg" alt="">
         <div class="business-info">
           <div class="business-info-h">
@@ -187,7 +170,7 @@ const toBusinessInfo = (businessId) => {
           </div>
           <div class="business-info-promotion">
             <div class="business-info-promotion-left">
-              <div class="business-info-promotion-left-incon" style="background￾color: #F1884F;">特</div>
+              <div class="business-info-promotion-left-incon" style="background-color: #F1884F;">特</div>
               <p>特价商品5元起</p>
             </div>
           </div>
@@ -195,7 +178,6 @@ const toBusinessInfo = (businessId) => {
       </li>
     </ul>
   </div>
-  <!-- 底部菜单部分 -->
   <Footer></Footer>
 </template>
 
@@ -298,7 +280,7 @@ const toBusinessInfo = (businessId) => {
   margin: 0 auto;
   height: 29vw;
   /*此三个样式组合，可以保证背景图片充满整个容器*/
-  background-image: url(../assets/img/index_banner.png);
+  background-image: url(../../assets/img/index_banner.png);
   background-repeat: no-repeat;
   background-size: cover;
   box-sizing: border-box;
@@ -486,17 +468,17 @@ const toBusinessInfo = (businessId) => {
   align-items: center;
 }
 .wrapper .business li .business-info .business-info-promotion .business-info-promotion-left
-     .business-info-promotion-left-incon {
-       width: 4vw;
-       height: 4vw;
-       background-color: #70BC46;
-       border-radius: 3px;
-       font-size: 3vw;
-       color: #fff;
-       display: flex;
-       justify-content: center;
-       align-items: center;
-     }
+.business-info-promotion-left-incon {
+  width: 4vw;
+  height: 4vw;
+  background-color: #70BC46;
+  border-radius: 3px;
+  font-size: 3vw;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .wrapper .business li .business-info .business-info-promotion .business-info-promotion-left
 p {
   color: #666;

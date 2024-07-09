@@ -124,38 +124,40 @@ const totalSettle = computed(() => {
     <header>
       <p>商家信息</p>
     </header>
-    <!-- 商家logo部分 -->
-    <div class="business-logo">
-      <img :src="business.businessImg" alt="商家logo">
+    <div class="content">
+      <!-- 商家logo部分 -->
+      <div class="business-logo">
+        <img :src="business.businessImg" alt="商家logo">
+      </div>
+      <!-- 商家信息部分 -->
+      <div class="business-info">
+        <h1>{{ business.businessName }}</h1>
+        <p>&#165;{{ business.starPrice }}起送 &#165;{{ business.deliveryPrice }}配送</p>
+        <p>{{ business.businessExplain }}</p>
+      </div>
+      <!-- 食品列表部分 -->
+      <ul class="food">
+        <li v-for="(item,index) in foodArr" :key="item.foodId">
+          <div class="food-left">
+            <img :src="item.foodImg" alt="食品图片">
+            <div class="food-left-info">
+              <h3>{{ item.foodName }}</h3>
+              <p>{{ item.foodExplain }}</p>
+              <p>&#165;{{ item.foodPrice }}</p>
+            </div>
+          </div>
+          <div class="food-right">
+            <div>
+              <el-icon @click="minus(index)" v-show="item.quantity !== 0"><Minus /></el-icon>
+            </div>
+            <p><span v-show="item.quantity !== 0">{{ item.quantity }}</span></p>
+            <div>
+              <el-icon @click="add(index)"><Plus /></el-icon>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
-    <!-- 商家信息部分 -->
-    <div class="business-info">
-      <h1>{{ business.businessName }}</h1>
-      <p>&#165;{{ business.starPrice }}起送 &#165;{{ business.deliveryPrice }}配送</p>
-      <p>{{ business.businessExplain }}</p>
-    </div>
-    <!-- 食品列表部分 -->
-    <ul class="food">
-      <li v-for="(item,index) in foodArr" :key="item.foodId">
-        <div class="food-left">
-          <img :src="item.foodImg" alt="食品图片">
-          <div class="food-left-info">
-            <h3>{{ item.foodName }}</h3>
-            <p>{{ item.foodExplain }}</p>
-            <p>&#165;{{ item.foodPrice }}</p>
-          </div>
-        </div>
-        <div class="food-right">
-          <div>
-            <el-icon @click="minus(index)" v-show="item.quantity !== 0"><Minus /></el-icon>
-          </div>
-          <p><span v-show="item.quantity !== 0">{{ item.quantity }}</span></p>
-          <div>
-            <el-icon @click="add(index)"><Plus /></el-icon>
-          </div>
-        </div>
-      </li>
-    </ul>
     <!--购物车部分 -->
     <div class="cart">
       <div class="cart-left">
@@ -187,8 +189,11 @@ const totalSettle = computed(() => {
 <style scoped>
 /****************** 总容器 ******************/
 .wrapper {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 /****************** header部分 ******************/
 .wrapper header {
@@ -205,12 +210,17 @@ const totalSettle = computed(() => {
   justify-content: center;
   align-items: center;
 }
+/****************** content部分 ******************/
+.wrapper .content {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 12vw; /* 留出header的高度 */
+  margin-bottom: 14vw; /* 留出footer的高度 */
+}
 /****************** 商家logo部分 ******************/
 .wrapper .business-logo {
   width: 100%;
   height: 35vw;
-  /*使用上外边距避开header部分*/
-  margin-top: 12vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -240,8 +250,6 @@ const totalSettle = computed(() => {
 /****************** 食品列表部分 ******************/
 .wrapper .food {
   width: 100%;
-  /*使用下外边距避开footer部分*/
-  margin-bottom: 14vw;
 }
 .wrapper .food li {
   width: 100%;
@@ -278,19 +286,13 @@ const totalSettle = computed(() => {
   justify-content: space-between;
   align-items: center;
 }
-.wrapper .food li .food-right .fa-minus-circle {
+.wrapper .food li .food-right .el-icon {
   font-size: 5.5vw;
-  color: #999;
   cursor: pointer;
 }
 .wrapper .food li .food-right p {
   font-size: 3.6vw;
   color: #333;
-}
-.wrapper .food li .food-right .fa-plus-circle {
-  font-size: 5.5vw;
-  color: #0097EF;
-  cursor: pointer;
 }
 /****************** 购物车部分 ******************/
 .wrapper .cart {
@@ -348,7 +350,6 @@ const totalSettle = computed(() => {
 .wrapper .cart .cart-right {
   flex: 1;
 }
-/*达到起送费时的样式*/
 .wrapper .cart .cart-right .cart-right-item {
   width: 100%;
   height: 100%;
@@ -362,19 +363,8 @@ const totalSettle = computed(() => {
   justify-content: center;
   align-items: center;
 }
-/*不够起送费时的样式（只有背景色和鼠标样式的区别）*/
-/**.wrapper .cart .cart-right .cart-right-item{
-width: 100%;
-height: 100%;
-background-color: #535356;
-color: #fff;
-font-size: 4.5vw;
-font-weight: 700;
-user-select: none;
-
-display: flex;
-justify-content: center;
-align-items: center;
-}*/
-
+/*不够起送费时的样式*/
+.wrapper .cart .cart-right .cart-right-item[style*="background-color: #535356;"] {
+  cursor: default;
+}
 </style>

@@ -61,6 +61,15 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
         return businessMapper.selectById(businessId);
     }
 
+    @Override
+    public List<Business> getBusinessesByUserId(Integer userId) {
+        QueryWrapper<Business> businessQueryWrapper=new QueryWrapper<>();
+        businessQueryWrapper
+                .eq("userId",userId)
+                .eq("delTag",1);
+        return  businessMapper.selectList(businessQueryWrapper);
+    }
+
 
     /**
      * 新建business
@@ -79,6 +88,7 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
                 businessVo.getStarPrice(),
                 businessVo.getDeliveryPrice(),
                 new Date(),
+                businessVo.getUserId(),
                 businessVo.getRemarks(),
                 1
         );

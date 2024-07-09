@@ -1,5 +1,5 @@
 <script setup>
-import Footer from "../Footer.vue";
+import Footer from "../userViews/Footer.vue";
 import {reactive, ref} from "vue";
 import {EditPen, Lock, Message} from "@element-plus/icons-vue";
 import {get, post} from "@/net";
@@ -161,7 +161,6 @@ const doReset = () => {
       </div>
     </transition>
   </div>
-  <Footer></Footer>
 </template>
 
 

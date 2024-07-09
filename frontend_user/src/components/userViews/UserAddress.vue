@@ -1,27 +1,27 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import Footer from '../components/Footer.vue';
-import router  from "@/router";
-import {post,getUser} from "../net";
-import {CirclePlusFilled, Delete, Edit} from "@element-plus/icons-vue";
-import {ElMessage} from "element-plus";
-import {useRoute} from "vue-router";
+import Footer from './Footer.vue';
+import router from "@/router";
+import { post, getUser } from "../../net";
+import { CirclePlusFilled, Delete, Edit } from "@element-plus/icons-vue";
+import { ElMessage } from "element-plus";
+import { useRoute } from "vue-router";
 
-const route=useRoute();
+const route = useRoute();
 const businessId = ref();
 const user = ref({});
 const deliveryAddressArr = ref([]);
 
 onMounted(() => {
   user.value = getUser();
-  businessId.value=route.query.businessId;
+  businessId.value = route.query.businessId;
   listDeliveryAddressByUserId();
 });
 
 const listDeliveryAddressByUserId = () => {
-  post(`/deliveryaddress/listDeliveryAddressByUserId/${user.value.id}`,{userId:user.value.id},(data)=>{
-    deliveryAddressArr.value=data;
-    console.log('deliveryAddressArr.value:',deliveryAddressArr.value);
+  post(`/deliveryaddress/listDeliveryAddressByUserId/${user.value.id}`, { userId: user.value.id }, (data) => {
+    deliveryAddressArr.value = data;
+    console.log('deliveryAddressArr.value:', deliveryAddressArr.value);
   })
 };
 
@@ -29,20 +29,20 @@ function getUserSexLabel(userSex) {
   return userSex === 1 ? "男" : "女";
 }
 
-const toOrder= (daId) => {
-  router.push({ path: '/orders', query: { daId: daId,businessId:businessId.value } });
+const toOrder = (daId) => {
+  router.push({ path: '/orders', query: { daId: daId, businessId: businessId.value } });
 };
 
-const addUserAddress=()=>{
-  router.push({path:'/addUserAddress',query:{businessId:businessId.value}})
+const addUserAddress = () => {
+  router.push({ path: '/addUserAddress', query: { businessId: businessId.value } })
 }
 const editUserAddress = (daId) => {
-  router.push({ path: '/editUserAddress', query: { daId: daId,businessId:businessId.value } });
+  router.push({ path: '/editUserAddress', query: { daId: daId, businessId: businessId.value } });
 };
 
 const removeUserAddress = (daId) => {
   if (confirm('Confirm to delete this delivery address?')) {
-    post(`/deliveryaddress/deleteDeliveryAddress/${daId}`,{daId:daId},()=>{
+    post(`/deliveryaddress/deleteDeliveryAddress/${daId}`, { daId: daId }, () => {
       ElMessage.success('删除成功');
       listDeliveryAddressByUserId();
     });
@@ -56,37 +56,39 @@ const removeUserAddress = (daId) => {
     <header>
       <p>地址管理</p>
     </header>
-    <!-- 地址列表部分 -->
-    <ul class="addresslist">
-      <li v-for="item in deliveryAddressArr" :key="item.daId">
-        <div class="addresslist-left" @click="toOrder(item.daId)">
-          <h3>{{ item.contactName }}  {{ getUserSexLabel(item.contactSex)}}  {{ item.contactTel }}
-          </h3>
-          <p>{{ item.address }}</p>
-        </div>
-        <div class="addresslist-right">
-          <el-icon @click="editUserAddress(item.daId)"><Edit /></el-icon>
-          <el-icon @click="removeUserAddress(item.daId)"><Delete /></el-icon>
-        </div>
-      </li>
-    </ul>
-    <!-- 新增地址部分 -->
-    <div class="addbtn" @click="addUserAddress">
-      <el-icon><CirclePlusFilled /></el-icon>
-      <p>新增收货地址</p>
+    <div class="content">
+      <!-- 地址列表部分 -->
+      <ul class="addresslist">
+        <li v-for="item in deliveryAddressArr" :key="item.daId">
+          <div class="addresslist-left" @click="toOrder(item.daId)">
+            <h3>{{ item.contactName }} {{ getUserSexLabel(item.contactSex) }} {{ item.contactTel }}</h3>
+            <p>{{ item.address }}</p>
+          </div>
+          <div class="addresslist-right">
+            <el-icon @click="editUserAddress(item.daId)"><Edit /></el-icon>
+            <el-icon @click="removeUserAddress(item.daId)"><Delete /></el-icon>
+          </div>
+        </li>
+      </ul>
+      <!-- 新增地址部分 -->
+      <div class="addbtn" @click="addUserAddress">
+        <el-icon><CirclePlusFilled /></el-icon>
+        <p>新增收货地址</p>
+      </div>
     </div>
     <!-- 底部菜单部分 -->
     <Footer></Footer>
   </div>
-
 </template>
-
 
 <style scoped>
 /*************** 总容器 ***************/
 .wrapper {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   background-color: #F5F5F5;
 }
 /*************** header ***************/
@@ -109,10 +111,16 @@ const removeUserAddress = (daId) => {
     font-size: 3.2vw; /* 调整在小屏幕上的字体大小 */
   }
 }
+/*************** content ***************/
+.wrapper .content {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 12vw; /* 留出header的高度 */
+  margin-bottom: 14vw; /* 留出footer的高度 */
+}
 /*************** addresslist ***************/
 .wrapper .addresslist {
   width: 100%;
-  margin-top: 12vw;
   background-color: #fff;
 }
 .wrapper .addresslist li {
@@ -169,5 +177,14 @@ const removeUserAddress = (daId) => {
 }
 .wrapper .addbtn p {
   margin-left: 2vw;
+}
+/*************** footer ***************/
+footer {
+  width: 100%;
+  height: 14vw;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
 }
 </style>

@@ -1,5 +1,5 @@
 <script setup>
-import Footer from '../components/Footer.vue';
+import Footer from './Footer.vue';
 import {ref,onMounted} from "vue";
 import { logout,post ,getUser} from '@/net'
 import router from "@/router";

@@ -1,31 +1,49 @@
 <script setup>
-import Footer from "../Footer.vue";
+import Footer from "../userViews/Footer.vue";
 import {User, Lock} from '@element-plus/icons-vue'
 import router from "@/router";
 import {reactive, ref} from "vue";
 import {login} from '@/net'
+
 const formRef = ref()
 const form = reactive({
   username: '',
   password: '',
   remember: false
 })
+
 const rules = {
   username: [
-    { required: true, message: '请输入用户名' }
+    { required: true, message: '请输入用户名', trigger: 'blur' }
   ],
   password: [
-    { required: true, message: '请输入密码'}
+    { required: true, message: '请输入密码', trigger: 'blur'}
   ]
 }
+
 function userLogin() {
   formRef.value.validate((isValid) => {
     if(isValid) {
-      login(form.username, form.password, form.remember, () => router.push("/index"))
+      login(form.username, form.password, form.remember, (data) => {
+        if(data && data.role) {
+          if(data.role === 'user'){
+            router.push("/index")
+          } else if(data.role === 'business'){
+            router.push("/businessIndex")
+          } else {
+            console.error("Unknown role:", data.role);
+          }
+        } else {
+          console.error("Invalid login response:", data);
+        }
+      }, (error) => {
+        console.error("Login failed:", error);
+      });
     }
   });
 }
 </script>
+
 <template>
   <div class="login-container">
     <header class="header">
@@ -76,8 +94,8 @@ function userLogin() {
       <el-button @click="router.push('/register')" type="warning" plain>注册账号</el-button>
     </div>
   </div>
-  <Footer></Footer>
 </template>
+
 <style scoped>
 .login-container {
   text-align: center;

@@ -1,5 +1,5 @@
 <script setup>
-import Footer from "../Footer.vue";
+import Footer from "../userViews/Footer.vue";
 import {EditPen, Lock, Message, User} from "@element-plus/icons-vue";
 import router from "@/router";
 import {reactive, ref} from "vue";
@@ -11,7 +11,8 @@ const form = reactive({
   password: '',
   password_repeat: '',
   email: '',
-  code: ''
+  code: '',
+  role: 'user' // 新增角色字段，默认值为 'user'
 })
 
 const validateUsername = (rule, value, callback) => {
@@ -52,6 +53,9 @@ const rules = {
   ],
   code: [
     { required: true, message: '请输入获取的验证码', trigger: 'blur' },
+  ],
+  role: [
+    { required: true, message: '请选择角色', trigger: 'change' }
   ]
 }
 
@@ -71,7 +75,8 @@ const register = () => {
         username: form.username,
         password: form.password,
         email: form.email,
-        code: form.code
+        code: form.code,
+        role: form.role // 将角色字段提交
       }, () => {
         ElMessage.success('欢迎注册饿了么网站')
         router.push("/")
@@ -98,6 +103,7 @@ const validateEmail = () => {
   })
 }
 </script>
+
 <template>
   <div style="text-align: center;margin: 0 20px">
     <div style="margin-top: 100px">
@@ -151,6 +157,12 @@ const validateEmail = () => {
             </el-col>
           </el-row>
         </el-form-item>
+        <el-form-item prop="role">
+          <el-radio-group v-model="form.role">
+            <el-radio label="user">用户</el-radio>
+            <el-radio label="business">商家</el-radio>
+          </el-radio-group>
+        </el-form-item>
       </el-form>
     </div>
     <div style="margin-top: 80px">
@@ -161,7 +173,6 @@ const validateEmail = () => {
       <el-link type="primary" style="translate: 0 -2px" @click="router.push('/')">立即登录</el-link>
     </div>
   </div>
-  <Footer></Footer>
 </template>
 
 <style scoped>

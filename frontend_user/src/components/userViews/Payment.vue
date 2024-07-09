@@ -1,6 +1,6 @@
 <script setup>
 import {ref, onMounted, toRaw} from 'vue';
-import Footer from '../components/Footer.vue';
+import Footer from './Footer.vue';
 import {useRoute} from "vue-router";
 import {post} from "@/net";
 import {ArrowDown, CircleCheckFilled} from "@element-plus/icons-vue";
@@ -96,11 +96,11 @@ const payOrder=()=>{
     <!-- 支付方式部分 -->
     <ul class="payment-type">
       <li>
-        <img src="../assets/img/alipay.png" alt="支付宝">
+        <img src="../../assets/img/alipay.png" alt="支付宝">
         <el-icon><CircleCheckFilled /></el-icon>
       </li>
       <li>
-        <img src="../assets/img/wechat.png" alt="微信">
+        <img src="../../assets/img/wechat.png" alt="微信">
       </li>
     </ul>
     <div class="payment-button">

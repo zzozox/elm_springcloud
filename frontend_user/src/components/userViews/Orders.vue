@@ -1,40 +1,41 @@
 <script setup>
-import { ref, computed, onMounted ,toRaw} from 'vue';
+import { ref, computed, onMounted, toRaw } from 'vue';
 import router from "@/router";
-import {getUser,post} from "@/net";
-import {useRoute} from "vue-router";
-import {ElMessage} from "element-plus";
+import { getUser, post } from "@/net";
+import { useRoute } from "vue-router";
+import { ElMessage } from "element-plus";
 
-const route=useRoute();
+const route = useRoute();
 const businessId = ref();
-const daId=ref();
+const daId = ref();
 const user = ref({});
 const business = ref({});
 const deliveryaddress = ref({});
-const showFoodArr=ref([
+const showFoodArr = ref([
   {
-    foodId:0,
+    foodId: 0,
     foodName: "",
     foodImg: "",
     foodPrice: 0,
     quantity: 0
   }
 ]);
-const order=ref({});
+const order = ref({});
 
 onMounted(() => {
   user.value = getUser();
-  businessId.value=route.query.businessId;
-  //设置默认daId为1，选择地址后可重置daId
-  if(route.query.daId==null){
-    daId.value=1;
-  }else {
-    daId.value=route.query.daId;
+  businessId.value = route.query.businessId;
+  // 设置默认daId为1，选择地址后可重置daId
+  if (route.query.daId == null) {
+    daId.value = 1;
+  } else {
+    daId.value = route.query.daId;
   }
   // 查询当前商家
-  post(`/business/byBusinessId/${businessId.value}`, {businessId: businessId.value},
+  post(`/business/byBusinessId/${businessId.value}`, { businessId: businessId.value },
       (data) => {
-    business.value = data;})
+        business.value = data;
+      })
   // 查询当前用户当前商家购物车中食品的详细信息
   post(`/cart/listCartByUserIdAndBusinessId`,
       { businessId: businessId.value, userId: user.value.id },
@@ -55,16 +56,16 @@ onMounted(() => {
         }
       });
 
-  //根据userAddres返回的daId查询地址信息
-  post(`/deliveryaddress/getDeliveryAddressById/${daId.value}`, {daId: daId.value},
-      (data) => {deliveryaddress.value = data;})
+  // 根据userAddres返回的daId查询地址信息
+  post(`/deliveryaddress/getDeliveryAddressById/${daId.value}`, { daId: daId.value },
+      (data) => { deliveryaddress.value = data; })
 })
-//计算总的价格
+// 计算总的价格
 const totalPrice = computed(() => {
   let total = 0;
   for (const item of showFoodArr.value) {
-        total += item.foodPrice * item.quantity;
-      }
+    total += item.foodPrice * item.quantity;
+  }
   total += business.value.deliveryPrice;
   return total;
 });
@@ -79,8 +80,8 @@ const toPayment = () => {
     businessId: businessId.value,
     daId: daId.value,
     orderTotal: totalPrice.value
-  },(data)=>{
-    order.value=data;
+  }, (data) => {
+    order.value = data;
     if (order.value == null) {
       ElMessage.warning('创建订单失败！');
     } else {
@@ -89,11 +90,12 @@ const toPayment = () => {
       router.push({
         path: '/payment',
         query: {
-        orderId: order.value.orderId,
-        //URL中的查询参数应该是字符串
-        //使用JSON.stringify将showFoodArr数组转换为字符串，然后将其作为查询参数传递。
-        // 在payment组件中，使用JSON.parse将其转换回数组
-        showFoodArr:JSON.stringify(toRaw(showFoodArr.value))}
+          orderId: order.value.orderId,
+          // URL中的查询参数应该是字符串
+          // 使用JSON.stringify将showFoodArr数组转换为字符串，然后将其作为查询参数传递。
+          // 在payment组件中，使用JSON.parse将其转换回数组
+          showFoodArr: JSON.stringify(toRaw(showFoodArr.value))
+        }
       });
     }
   })
@@ -106,29 +108,31 @@ const toPayment = () => {
     <header>
       <p>确认订单</p>
     </header>
-    <!-- 订单信息部分 -->
-    <div class="order-info">
-      <h5>订单配送至：</h5>
-      <div class="order-info-address" @click="toUserAddress">
-        <p>{{ deliveryaddress !== null ? deliveryaddress.address : '请选择送货地址' }}</p>
-        <i class="fa fa-angle-right"></i>
-      </div>
-      <p>{{ deliveryaddress.contactName }}  {{ deliveryaddress.contactSex===1?'男':'女' }}  {{ deliveryaddress.contactTel }}</p>
-    </div>
-    <h3>{{ business.businessName }}</h3>
-    <!-- 订单明细部分 -->
-    <ul class="order-detailed">
-      <li v-for="showItem in showFoodArr" :key="showItem.foodId">
-        <div class="order-detailed-left">
-          <img :src="showItem.foodImg" alt="食品图片">
-          <p>{{ showItem.foodName }} x {{ showItem.quantity }}</p>
+    <div class="content">
+      <!-- 订单信息部分 -->
+      <div class="order-info">
+        <h5>订单配送至：</h5>
+        <div class="order-info-address" @click="toUserAddress">
+          <p>{{ deliveryaddress !== null ? deliveryaddress.address : '请选择送货地址' }}</p>
+          <i class="fa fa-angle-right"></i>
         </div>
-        <p>&#165;{{ showItem.foodPrice * showItem.quantity }}</p>
-      </li>
-    </ul>
-    <div class="order-deliveryfee">
-      <p>配送费</p>
-      <p>&#165;{{ business.deliveryPrice }}</p>
+        <p>{{ deliveryaddress.contactName }} {{ deliveryaddress.contactSex === 1 ? '男' : '女' }} {{ deliveryaddress.contactTel }}</p>
+      </div>
+      <h3>{{ business.businessName }}</h3>
+      <!-- 订单明细部分 -->
+      <ul class="order-detailed">
+        <li v-for="showItem in showFoodArr" :key="showItem.foodId">
+          <div class="order-detailed-left">
+            <img :src="showItem.foodImg" alt="食品图片">
+            <p>{{ showItem.foodName }} x {{ showItem.quantity }}</p>
+          </div>
+          <p>&#165;{{ showItem.foodPrice * showItem.quantity }}</p>
+        </li>
+      </ul>
+      <div class="order-deliveryfee">
+        <p>配送费</p>
+        <p>&#165;{{ business.deliveryPrice }}</p>
+      </div>
     </div>
     <!-- 合计部分 -->
     <div class="total">
@@ -142,12 +146,14 @@ const toPayment = () => {
   </div>
 </template>
 
-
 <style scoped>
 /****************** 总容器 ******************/
 .wrapper {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 /****************** header部分 ******************/
 .wrapper header {
@@ -164,11 +170,16 @@ const toPayment = () => {
   justify-content: center;
   align-items: center;
 }
+/****************** content部分 ******************/
+.wrapper .content {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 12vw; /* 留出header的高度 */
+  margin-bottom: 14vw; /* 留出footer的高度 */
+}
 /****************** 订单信息部分 ******************/
 .wrapper .order-info {
-  /*注意这里，不设置高，靠内容撑开。因为地址有可能折行*/
   width: 100%;
-  margin-top: 12vw;
   background-color: #0097EF;
   box-sizing: border-box;
   padding: 2vw;
@@ -277,4 +288,4 @@ const toPayment = () => {
   justify-content: center;
   align-items: center;
 }
-</style>le>
+</style>

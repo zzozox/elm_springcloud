@@ -11,26 +11,21 @@ import java.math.BigDecimal;
 @Data
 public class BusinessVo {
     //商家名称
-    @TableField("businessName")
     private String businessName;
     //商家地址
-    @TableField("businessAddress")
     private String businessAddress;
     //商家介绍
-    @TableField("businessExplain")
     private String businessExplain;
     //商家图片
-    @TableField("businessImg")
     private String businessImg;
     //点餐分类
-    @TableField("orderTypeId")
     private Integer orderTypeId;
     //起送费
-    @TableField("starPrice")
     private BigDecimal starPrice;
-    //配送费
-    @TableField("deliveryPrice")
+    //配送费")
     private BigDecimal deliveryPrice;
+    //门店所属商家
+    private Integer userId;
     //备注
     private String remarks;
 }

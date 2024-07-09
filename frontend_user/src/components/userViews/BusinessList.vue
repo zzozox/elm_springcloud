@@ -5,7 +5,7 @@ import router from "@/router";
 import {useRoute} from "vue-router";
 
 // 引入组件
-import Footer from '../components/Footer.vue';
+import Footer from './Footer.vue';
 
 const route=useRoute();
 const orderTypeId = ref(null);

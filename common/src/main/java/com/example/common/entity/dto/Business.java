@@ -51,6 +51,9 @@ public class Business implements BaseData {
     //商家注册时间
     @TableField("registerTime")
     private Date registerTime;
+    //门店所属商家
+    @TableField("userId")
+    private Integer userId;
     //备注
     private String remarks;
     //删除标记（1：正常； 0：删除）

@@ -69,6 +69,10 @@ public class BusinessController {
         }
     }
 
+    @PostMapping("/getBusinessesByUserId/{userId}")
+    public RestBean<List<Business>> getBusinessesByUserId(@PathVariable Integer userId) {
+        return RestBean.success(businessService.getBusinessesByUserId(userId));
+    }
     /**
      * 新建business
      * @param businessVo

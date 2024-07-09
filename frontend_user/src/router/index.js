@@ -7,7 +7,7 @@ const index = createRouter({
         {
             path: '/',
             name: 'welcome',
-            component: () => import('../components/WelcomeView.vue'),
+            component: () => import('../components/welcome/WelcomeView.vue'),
         },{
             path: '/login',
             name: 'login',
@@ -23,47 +23,75 @@ const index = createRouter({
         },{
             path: '/logout',
             name: 'Logout',
-            component: () => import('../components/IndexView.vue'),
+            component: () => import('../components/userViews/IndexView.vue'),
         },{
             path:'/addUserAddress',
             name:"add-user-address",
-            component: () => import('../components/AddUserAddress.vue'),
+            component: () => import('../components/userViews/AddUserAddress.vue'),
         },{
             path:'/businessInfo',
             name:"businessInfo",
-            component: () => import('../components/BusinessInfo.vue'),
+            component: () => import('../components/userViews/BusinessInfo.vue'),
         },{
             path:'/businessList/',
             name:"businessList",
-            component: () => import('../components/BusinessList.vue'),
+            component: () => import('../components/userViews/BusinessList.vue'),
         },{
             path:'/editUserAddress',
             name:"edit-user-address",
-            component: () => import('../components/EditUserAddress.vue'),
+            component: () => import('../components/userViews/EditUserAddress.vue'),
         },{
             path:'/index',
             name:"index",
-            component: () => import('../components/index.vue'),
+            component: () => import('../components/userViews/index.vue'),
         },{
             path:'/orderList',
             name:"orderList",
-            component: () => import('../components/OrderList.vue'),
+            component: () => import('../components/userViews/OrderList.vue'),
         },{
             path:'/orders',
             name:"orders",
-            component: () => import('../components/Orders.vue'),
+            component: () => import('../components/userViews/Orders.vue'),
         },{
             path:'/payment',
             name:"payment",
-            component: () => import('../components/Payment.vue'),
+            component: () => import('../components/userViews/Payment.vue'),
         },{
             path:'/userAddress',
             name:"userAddress",
-            component: () => import('../components/UserAddress.vue'),
+            component: () => import('../components/userViews/UserAddress.vue'),
         },{
             path:'/editUser',
             name:"editUser",
-            component:()=>import('../components/EditUser.vue')
+            component:()=>import('../components/userViews/EditUser.vue')
+        },{
+            path:'/businessIndex',
+            name:"businessIndex",
+            component:()=>import('../components/businessViews/businessIndex.vue')
+        },{
+            path:'/businessLogout',
+            name:"businessLogout",
+            component:()=>import('../components/businessViews/businessLogout.vue')
+        },{
+            path:'/businessInfoLook',
+            name:"businessInfoLook",
+            component:()=>import('../components/businessViews/businessInfoLook.vue')
+        },{
+            path:'/businessInfoManage',
+            name:"businessInfoManage",
+            component:()=>import('../components/businessViews/businessInfoManage.vue')
+        },{
+            path:'/myBusiness',
+            name:"myBusiness",
+            component:()=>import('../components/businessViews/myBusiness.vue')
+        },{
+            path:'/editBusiness',
+            name:"editBusiness",
+            component:()=>import('../components/businessViews/editBusiness.vue')
+        },{
+            path:'/addBusiness',
+            name:"addBusiness",
+            component:()=>import('../components/businessViews/addBusiness.vue')
         }
     ]
 })

@@ -1,5 +1,5 @@
 <script setup>
-import Footer from '../components/Footer.vue';
+import Footer from './Footer.vue';
 import { ref, onMounted } from 'vue';
 import { getUser, post } from "@/net";
 import { CaretBottom } from "@element-plus/icons-vue";
@@ -55,11 +55,12 @@ const detailetShow = (item) => {
   item.isShowDetailet = !item.isShowDetailet;
 };
 
-const toPay=(id)=>{
+const toPay = (id) => {
   router.push({
     path: '/payment',
     query: {
-      orderId: id}
+      orderId: id
+    }
   });
 }
 </script>
@@ -69,75 +70,74 @@ const toPay=(id)=>{
     <header>
       <p>我的订单</p>
     </header>
+    <div class="content">
+      <h3>未支付订单信息：</h3>
+      <div class="order">
+        <ul>
+          <li v-for="item in orderArr" v-show="item.orderState === 0" :key="item.orderId">
+            <ul class="order-info">
+              <p>
+                {{ item.business.businessName }}
+                <el-icon @click="detailetShow(item)"><CaretBottom /></el-icon>
+              </p>
+              <div class="order-info-right">
+                <p>&#165;{{ item.orderTotal }}</p>
+                <div class="order-info-right-icon" @click="toPay(item.orderId)">去支付</div>
+              </div>
+            </ul>
+            <ul class="order-detailet" v-show="item.isShowDetailet">
+              <li v-for="odItem in item.showFoodArr" :key="odItem.foodId">
+                <p>{{ odItem.foodName }} x {{ odItem.quantity }}</p>
+                <p>&#165;{{ odItem.foodPrice * odItem.quantity }}</p>
+              </li>
+              <li>
+                <p>配送费</p>
+                <p>&#165;{{ item.business.deliveryPrice }}</p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
 
-    <h3>未支付订单信息：</h3>
-    <div class="order">
-      <ul>
-        <li v-for="item in orderArr" v-show="item.orderState === 0" :key="item.orderId">
-          <ul class="order-info">
-            <p>
-              {{ item.business.businessName }}
-              <el-icon @click="detailetShow(item)"><CaretBottom /></el-icon>
-            </p>
-            <div class="order-info-right">
-              <p>&#165;{{ item.orderTotal }}</p>
-              <div class="order-info-right-icon"  @click="toPay(item.orderId)">去支付</div>
+      <h3>已支付订单信息：</h3>
+      <div class="order">
+        <ul>
+          <li v-for="item in orderArr" v-show="item.orderState === 1" :key="item.orderId">
+            <div class="order-info">
+              <p>
+                {{ item.business.businessName }}
+                <el-icon @click="detailetShow(item)"><CaretBottom /></el-icon>
+              </p>
+              <div class="order-info-right">
+                <p>&#165;{{ item.orderTotal }}</p>
+              </div>
             </div>
-          </ul>
-          <ul class="order-detailet" v-show="item.isShowDetailet">
-            <li v-for="odItem in item.showFoodArr" :key="odItem.foodId">
-              <p>{{ odItem.foodName }} x {{ odItem.quantity }}</p>
-              <p>&#165;{{ odItem.foodPrice * odItem.quantity }}</p>
-            </li>
-            <li>
-              <p>配送费</p>
-              <p>&#165;{{ item.business.deliveryPrice }}</p>
-            </li>
-          </ul>
-        </li>
-      </ul>
+            <ul class="order-detailet" v-show="item.isShowDetailet">
+              <li v-for="odItem in item.showFoodArr" :key="odItem.foodId">
+                <p>{{ odItem.foodName }} x {{ odItem.quantity }}</p>
+                <p>&#165;{{ odItem.foodPrice * odItem.quantity }}</p>
+              </li>
+              <li>
+                <p>配送费</p>
+                <p>&#165;{{ item.business.deliveryPrice }}</p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-
-    <h3>已支付订单信息：</h3>
-    <div class="order">
-      <ul>
-        <li v-for="item in orderArr" v-show="item.orderState === 1" :key="item.orderId">
-          <div class="order-info">
-            <p>
-              {{ item.business.businessName }}
-              <el-icon @click="detailetShow(item)"><CaretBottom /></el-icon>
-            </p>
-            <div class="order-info-right">
-              <p>&#165;{{ item.orderTotal }}</p>
-            </div>
-          </div>
-          <ul class="order-detailet" v-show="item.isShowDetailet">
-            <li v-for="odItem in item.showFoodArr" :key="odItem.foodId">
-              <p>{{ odItem.foodName }} x {{ odItem.quantity }}</p>
-              <p>&#165;{{ odItem.foodPrice * odItem.quantity }}</p>
-            </li>
-            <li>
-              <p>配送费</p>
-              <p>&#165;{{ item.business.deliveryPrice }}</p>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
     <Footer />
   </div>
 </template>
 
-
-
-
-
 <style scoped>
 /****************** 总容器 ******************/
 .wrapper {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 /****************** header部分 ******************/
 .wrapper header {
@@ -154,9 +154,15 @@ const toPay=(id)=>{
   justify-content: center;
   align-items: center;
 }
+/****************** content部分 ******************/
+.wrapper .content {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 12vw; /* 留出header的高度 */
+  margin-bottom: 14vw; /* 留出footer的高度 */
+}
 /****************** 历史订单列表部分 ******************/
 .wrapper h3 {
-  margin-top: 12vw;
   box-sizing: border-box;
   padding: 4vw;
   font-size: 4vw;
@@ -201,5 +207,14 @@ const toPay=(id)=>{
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+/****************** footer ******************/
+footer {
+  width: 100%;
+  height: 14vw;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
 }
 </style>

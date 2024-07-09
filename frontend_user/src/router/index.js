@@ -92,6 +92,14 @@ const index = createRouter({
             path:'/addBusiness',
             name:"addBusiness",
             component:()=>import('../components/businessViews/addBusiness.vue')
+        },{
+            path:'/addFood',
+            name:"addFood",
+            component:()=>import('../components/businessViews/addFood.vue')
+        },{
+            path:'/editFood',
+            name:"editFood",
+            component:()=>import('../components/businessViews/editFood.vue')
         }
     ]
 })

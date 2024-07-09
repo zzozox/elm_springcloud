@@ -52,7 +52,7 @@ const toAddBusiness = () => {
   <div class="wrapper">
     <header>
       <p>我的门店</p>
-      <el-icon @click="toAddBusiness"><Plus /></el-icon>
+      <el-icon @click="toAddBusiness"  style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"><Plus /></el-icon>
     </header>
     <div class="content">
       <ul class="business">

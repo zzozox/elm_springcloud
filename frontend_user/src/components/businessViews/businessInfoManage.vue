@@ -4,6 +4,8 @@ import { post, getUser } from '@/net';
 import { useRoute } from "vue-router";
 import Footer from './businessFooter.vue';
 import router from "@/router";
+import { Delete, Edit, Plus } from "@element-plus/icons-vue";
+import { ElMessage } from "element-plus";
 
 const route = useRoute();
 const user = ref(null);
@@ -19,20 +21,50 @@ onMounted(() => {
   // 根据 businessId 查询商家信息
   post(`/business/byBusinessId/${businessId.value}`, { businessId: businessId.value }, (data) => {
     business.value = data;
-    // 根据 businessId 查询所属食品信息
-    post(`/food/byBusinessId/${businessId.value}`, { businessId: businessId.value }, (data) => {
-      foodArr.value = data;
-    });
+    listFoodArr(businessId.value);
   });
 });
 
+const listFoodArr=(businessId)=>{
+  // 根据 businessId 查询所属食品信息
+  post(`/food/byBusinessId/${businessId}`, { businessId: businessId }, (data) => {
+    foodArr.value = data;
+  });
+}
+
+const editBusiness = () => {
+  router.push({ path: '/editBusiness', query: { businessId: businessId.value } });
+};
+
+const addFood = () => {
+  router.push({ path: '/addFood', query: { businessId: businessId.value } });
+};
+
+const editFood = (foodId) => {
+  router.push({ path: '/editFood', query: { foodId: foodId } });
+};
+
+const deleteFood = (foodId) => {
+  if (confirm('确定要删除这个食品吗？')) {
+    post(`/food/deleteFood/${foodId}`, { foodId: foodId }, () => {
+      ElMessage.success('删除成功');
+      // 重新加载食品列表
+      listFoodArr(businessId.value);
+    });
+  }
+};
 </script>
+
 <template>
   <div class="wrapper">
     <!-- header部分 -->
     <header>
       <p>商家信息</p>
-    </header>
+      <div class="header-icons">
+        <el-icon @click="editBusiness"><Edit /></el-icon>
+        <el-icon @click="addFood"><Plus /></el-icon>
+      </div>
+      </header>
     <div class="content">
       <!-- 商家logo部分 -->
       <div class="business-logo">
@@ -54,6 +86,10 @@ onMounted(() => {
               <p>{{ item.foodExplain }}</p>
               <p>&#165;{{ item.foodPrice }}</p>
             </div>
+          </div>
+          <div class="food-right">
+            <el-icon @click="editFood(item.foodId)"><Edit /></el-icon>
+            <el-icon @click="deleteFood(item.foodId)"><Delete /></el-icon>
           </div>
         </li>
       </ul>
@@ -85,6 +121,17 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.header-icons {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+}
+.header-icons .el-icon {
+  font-size: 5vw;
+  margin-left: 10px;
+  cursor: pointer;
 }
 /****************** content部分 ******************/
 .wrapper .content {
@@ -155,6 +202,15 @@ onMounted(() => {
   font-size: 3vw;
   color: #888;
   margin-top: 2vw;
+}
+.wrapper .food li .food-right {
+  display: flex;
+  align-items: center;
+}
+.wrapper .food li .food-right .el-icon {
+  font-size: 5.5vw;
+  margin-left: 2vw;
+  cursor: pointer;
 }
 /****************** 购物车部分 ******************/
 .wrapper .cart {

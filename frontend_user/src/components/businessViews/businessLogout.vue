@@ -25,7 +25,7 @@ function getUserSexLabel(userSex) {
     <div class="profile-header">
       <div class="profile-username">{{ userData.username }}</div>
       <div class="header-buttons">
-        <el-icon @click="router.push('/editUser')" class="header-icon"><Edit /></el-icon>
+        <el-icon @click="router.push('/editBusinessAccount')" class="header-icon"><Edit /></el-icon>
       </div>
     </div>
     <div class="profile-content">

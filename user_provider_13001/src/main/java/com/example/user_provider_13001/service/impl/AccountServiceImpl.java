@@ -221,17 +221,17 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
 
     /**
      * 更新用户信息
-     * @param updataAccountVo
+     * @param account
      * @return
      */
     @Override
-    public String updateAccount(UpdataAccountVo updataAccountVo) {
+    public String updateAccount(Account account) {
         UpdateWrapper<Account> accountUpdateWrapper=new UpdateWrapper<>();
-        accountUpdateWrapper.eq("userId",updataAccountVo.getUserId())
-                .set("username",updataAccountVo.getUsername())
-                .set("userSex",updataAccountVo.getUserSex())
-                .set("userImg",updataAccountVo.getUserImg())
-                .set("password",updataAccountVo.getPassword());
+        accountUpdateWrapper.eq("userId",account.getUserId())
+                .set("username",account.getUsername())
+                .set("userSex",account.getUserSex())
+                .set("userImg",account.getUserImg())
+                .set("role",account.getRole());
         if(accountMapper.update(null,accountUpdateWrapper)==1) {
             return null;
         }else {

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import Footer from './Footer.vue';
+import Footer from './businessFooter.vue';
 import router from "@/router";
 import { useRoute } from "vue-router";
 import { post, getUser } from "@/net";
@@ -54,7 +54,7 @@ const editAccount = () => {
     delTag: account.value.delTag
   }, () => {
     ElMessage.success('修改用户信息成功');
-    router.push({ path: '/logout'});
+    router.push({ path: '/businessLogout'});
   });
 };
 
@@ -88,18 +88,18 @@ const handleImageChange = (event) => {
           <input type="text" v-model="account.username" placeholder="用户名">
         </div>
       </li>
-<!--      <li>-->
-<!--        <div class="title">密码：</div>-->
-<!--        <div class="content">-->
-<!--          <input type="password" v-model="account.password" placeholder="密码">-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <div class="title">邮箱：</div>-->
-<!--        <div class="content">-->
-<!--          <input type="email" v-model="account.email" placeholder="邮箱">-->
-<!--        </div>-->
-<!--      </li>-->
+      <!--      <li>-->
+      <!--        <div class="title">密码：</div>-->
+      <!--        <div class="content">-->
+      <!--          <input type="password" v-model="account.password" placeholder="密码">-->
+      <!--        </div>-->
+      <!--      </li>-->
+      <!--      <li>-->
+      <!--        <div class="title">邮箱：</div>-->
+      <!--        <div class="content">-->
+      <!--          <input type="email" v-model="account.email" placeholder="邮箱">-->
+      <!--        </div>-->
+      <!--      </li>-->
       <li>
         <div class="title">角色：</div>
         <div class="content" style="font-size: 3vw;">

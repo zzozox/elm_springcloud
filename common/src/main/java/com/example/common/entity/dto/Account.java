@@ -19,7 +19,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Account implements BaseData {
     //用户id
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "userId",type = IdType.AUTO)
     private Integer userId;
     //用户名
     @TableField("username")

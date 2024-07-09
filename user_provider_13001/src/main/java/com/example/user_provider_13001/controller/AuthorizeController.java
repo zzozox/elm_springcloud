@@ -147,9 +147,9 @@ public class AuthorizeController {
      */
     @PostMapping("/updateUser")
     @Operation(summary = "修改用户信息")
-    public RestBean<Void> updateUser(@RequestBody @Valid UpdataAccountVo vo){
+    public RestBean<Void> updateUser(@RequestBody @Valid Account account){
         return  this.messageHandle(() ->
-                accountService.updateAccount(vo));
+                accountService.updateAccount(account));
     }
     /**
      * 针对于返回值为String作为错误信息的方法进行统一处理

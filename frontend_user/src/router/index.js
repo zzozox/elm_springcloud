@@ -100,6 +100,10 @@ const index = createRouter({
             path:'/editFood',
             name:"editFood",
             component:()=>import('../components/businessViews/editFood.vue')
+        },{
+            path:'/editBusinessAccount',
+            name:"editBusinessAccount",
+            component:()=>import('../components/businessViews/editBusinessAccount.vue')
         }
     ]
 })

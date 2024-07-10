@@ -13,6 +13,13 @@ java {
     }
 }
 
+jar {
+    archiveFileName = 'cart_provider.jar'
+    manifest {
+        attributes 'Main-Class': 'com.example.cart_provider_13009.CartProvider13009Application'
+    }
+}
+
 repositories {
     mavenCentral()
 }

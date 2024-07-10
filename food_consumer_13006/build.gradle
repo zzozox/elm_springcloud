@@ -13,6 +13,13 @@ java {
     }
 }
 
+jar {
+    archiveFileName = 'food_cunsumer.jar'
+    manifest {
+        attributes 'Main-Class': 'com.example.food_consumer_13006.FoodConsumer13006Application'
+    }
+}
+
 repositories {
     mavenCentral()
 }

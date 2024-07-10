@@ -1,0 +1,248 @@
+version: '3.8'
+services:
+  eureka-server1:
+    image: register:latest
+    container_name: eureka1
+    ports:
+      - "13100:80"
+    environment:
+      - server.port=80
+      - eureka.instance.hostname=eureka1
+      - eureka.client.serviceUrl.defaultZone=http://eureka2/eureka/
+
+  eureka-server2:
+    image: register:latest
+    container_name: eureka2
+    ports:
+      - "14100:80"
+    environment:
+      - server.port=80
+      - eureka.instance.hostname=eureka2
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/
+
+
+  business-provider-server1:
+    image: business_provider:latest
+    container_name: business_provider1
+    ports:
+      - "13003:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 100
+
+  provider-server2:
+    image: business_provider:latest
+    container_name: business_provider2
+    ports:
+      - "14003:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 200
+
+
+  business-consumer-server:
+    image: business_consumer:latest
+    container_name: business_consumer
+    ports:
+      - "13004:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+
+
+  cart-provider-server1:
+    image: cart_provider:latest
+    container_name: cart_provider1
+    ports:
+      - "13009:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 100
+
+  cart-provider-server2:
+    image: cart_provider:latest
+    container_name: cart_provider2
+    ports:
+      - "14009:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 200
+
+
+  cart-consumer-server:
+    image: cart_consumer:latest
+    container_name: cart_consumer
+    ports:
+      - "13010:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+
+
+  deliveryaddress-provider-server1:
+    image: deliveryaddress_provider:latest
+    container_name: deliveryaddress_provider1
+    ports:
+      - "13007:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 100
+
+  deliveryaddress-provider-server2:
+    image: deliveryaddress_provider:latest
+    container_name: deliveryaddress_provider2
+    ports:
+      - "14007:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 200
+
+
+  deliveryaddress-consumer-server:
+    image: deliveryaddress_consumer:latest
+    container_name: deliveryaddress_consumer
+    ports:
+      - "13008:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+
+
+  food-provider-server1:
+    image: food_provider:latest
+    container_name: food_provider1
+    ports:
+      - "13005:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 100
+
+  food-provider-server2:
+    image: food_provider:latest
+    container_name: food_provider2
+    ports:
+      - "14005:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 200
+
+
+  food-consumer-server:
+    image: food_consumer:latest
+    container_name: food_consumer
+    ports:
+      - "13006:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+
+
+  order-provider-server1:
+    image: order_provider:latest
+    container_name: order_provider1
+    ports:
+      - "13011:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 100
+
+  order-provider-server2:
+    image: order_provider:latest
+    container_name: order_provider2
+    ports:
+      - "14011:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 200
+
+
+  order-consumer-server:
+    image: order_consumer:latest
+    container_name: order_consumer
+    ports:
+      - "13012:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+
+
+  orderdetailet-provider-server1:
+    image: orderdetailet_provider:latest
+    container_name: orderdetailet_provider1
+    ports:
+      - "13013:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 100
+
+  orderdetailet-provider-server2:
+    image: orderdetailet_provider:latest
+    container_name: orderdetailet_provider2
+    ports:
+      - "14013:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 200
+
+
+  orderdetailet-consumer-server:
+    image: orderdetailet_consumer:latest
+    container_name: orderdetailet_consumer
+    ports:
+      - "13014:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+
+
+  user-provider-server1:
+    image: user_provider:latest
+    container_name: user_provider1
+    ports:
+      - "13001:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 100
+
+  user-provider-server2:
+    image: user_provider:latest
+    container_name: user_provider2
+    ports:
+      - "14001:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+      - my-value = 200
+
+
+  user-consumer-server:
+    image: user_consumer:latest
+    container_name: user_consumer
+    ports:
+      - "13002:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/
+
+
+  gateway-server:
+    image: gateway:latest
+    container_name: gateway
+    ports:
+      - "13200:80"
+    environment:
+      - server.port=80
+      - eureka.client.serviceUrl.defaultZone=http://eureka1/eureka/, http://eureka2/eureka/

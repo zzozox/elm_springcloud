@@ -13,6 +13,13 @@ java {
     }
 }
 
+jar {
+    archiveFileName = 'gateway.jar'
+    manifest {
+        attributes 'Main-Class': 'com.example.gateway_13200.Gateway13200Application'
+    }
+}
+
 repositories {
     mavenCentral()
 }

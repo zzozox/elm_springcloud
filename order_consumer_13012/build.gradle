@@ -13,6 +13,13 @@ java {
     }
 }
 
+jar {
+    archiveFileName = 'order_cunsumer.jar'
+    manifest {
+        attributes 'Main-Class': 'com.example.order_consumer_13012.OrderConsumer13012Application'
+    }
+}
+
 repositories {
     mavenCentral()
 }

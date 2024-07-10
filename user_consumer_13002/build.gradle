@@ -13,6 +13,13 @@ java {
     }
 }
 
+//jar {
+//    archiveFileName = 'user_consumer.jar'
+//    manifest {
+//        attributes 'Main-Class': 'com.example.user_consumer_13002.UserConsumer13002Application'
+//    }
+//}
+
 repositories {
     mavenCentral()
 }

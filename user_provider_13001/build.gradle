@@ -13,12 +13,12 @@ java {
     }
 }
 
-//jar {
-//    archiveFileName = 'user_provider.jar'
-//    manifest {
-//        attributes 'Main-Class': 'com.example.user_provider_13002.UserProvider13001Application'
-//    }
-//}
+jar {
+    archiveFileName = 'user_provider.jar'
+    manifest {
+        attributes 'Main-Class': 'com.example.user_provider_13002.UserProvider13001Application'
+    }
+}
 
 repositories {
     mavenCentral()

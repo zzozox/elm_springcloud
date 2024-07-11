@@ -59,7 +59,7 @@ const editFood = () => {
     delTag:1
   }, () => {
     ElMessage.success('修改食品信息成功')
-    router.push({ path: '/businessInfoManage', query: { businessId: food.value.businessId } });
+    router.push({ path: '/business/businessInfoManage', query: { businessId: food.value.businessId } });
   })
 };
 

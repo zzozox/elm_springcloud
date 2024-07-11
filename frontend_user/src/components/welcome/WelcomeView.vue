@@ -9,7 +9,7 @@ import router from "@/router";
 <!--      Your browser does not support the video tag.-->
 <!--    </video>-->
     <img src="../../assets/background.jpg" alt="">
-    <button @click="router.push('/index')">Welocome to Eleme</button>
+    <button @click="router.push('/user/login')">Welocome to Eleme</button>
   </div>
 </template>
 

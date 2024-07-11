@@ -48,10 +48,10 @@ watchEffect(() => {
 });
 
 const toBusinessList = (orderTypeId) => {
-  router.push({ path: '/businessList', query: { orderTypeId } });
+  router.push({ path: '/user/businessList', query: { orderTypeId } });
 };
 const toBusinessInfo = (businessId) => {
-  router.push({ path: '/businessInfo', query: { businessId: businessId } });
+  router.push({ path: '/user/businessInfo', query: { businessId: businessId } });
 };
 
 </script>

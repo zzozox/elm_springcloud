@@ -78,7 +78,7 @@ const addBusiness = () => {
     delTag: 1
   }, () => {
     ElMessage.success('修改门店信息成功')
-    router.push({ path: '/myBusiness' });
+    router.push({ path: '/business/myBusiness' });
   })
 };
 

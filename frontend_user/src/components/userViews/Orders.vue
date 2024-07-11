@@ -70,7 +70,7 @@ const totalPrice = computed(() => {
   return total;
 });
 const toUserAddress = () => {
-  router.push({ path: '/userAddress', query: { businessId: businessId.value } });
+  router.push({ path: '/user/userAddress', query: { businessId: businessId.value } });
 };
 
 const toPayment = () => {
@@ -88,7 +88,7 @@ const toPayment = () => {
       ElMessage.success('下单成功，请支付订单');
       console.log('showFoodArr.value:', showFoodArr.value);
       router.push({
-        path: '/payment',
+        path: '/user/payment',
         query: {
           orderId: order.value.orderId,
           // URL中的查询参数应该是字符串

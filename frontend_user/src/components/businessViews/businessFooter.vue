@@ -1,6 +1,6 @@
 <template>
   <ul class="footer">
-    <li @click="router.push('/businessIndex')">
+    <li @click="router.push('/business/businessIndex')">
       <el-icon><HomeFilled /></el-icon>
       <p>首页</p>
     </li>
@@ -23,14 +23,14 @@ const toMe=()=>{
   if(unauthorized()){
     router.push('/login');
   }else {
-    router.push('/businessLogout')
+    router.push('/business/businessLogout')
   }
 }
 const toBusinessInfo=()=>{
   if(unauthorized()){
     router.push('/login');
   }else {
-    router.push('/myBusiness')
+    router.push('/business/myBusiness')
   }
 }
 </script>-->

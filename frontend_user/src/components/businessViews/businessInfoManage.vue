@@ -33,15 +33,15 @@ const listFoodArr=(businessId)=>{
 }
 
 const editBusiness = () => {
-  router.push({ path: '/editBusiness', query: { businessId: businessId.value } });
+  router.push({ path: '/business/editBusiness', query: { businessId: businessId.value } });
 };
 
 const addFood = () => {
-  router.push({ path: '/addFood', query: { businessId: businessId.value } });
+  router.push({ path: '/business/addFood', query: { businessId: businessId.value } });
 };
 
 const editFood = (foodId) => {
-  router.push({ path: '/editFood', query: { foodId: foodId } });
+  router.push({ path: '/business/editFood', query: { foodId: foodId } });
 };
 
 const deleteFood = (foodId) => {

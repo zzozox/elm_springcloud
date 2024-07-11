@@ -30,14 +30,14 @@ function getUserSexLabel(userSex) {
 }
 
 const toOrder = (daId) => {
-  router.push({ path: '/orders', query: { daId: daId, businessId: businessId.value } });
+  router.push({ path: '/user/orders', query: { daId: daId, businessId: businessId.value } });
 };
 
 const addUserAddress = () => {
-  router.push({ path: '/addUserAddress', query: { businessId: businessId.value } })
+  router.push({ path: '/user/addUserAddress', query: { businessId: businessId.value } })
 }
 const editUserAddress = (daId) => {
-  router.push({ path: '/editUserAddress', query: { daId: daId, businessId: businessId.value } });
+  router.push({ path: '/user/editUserAddress', query: { daId: daId, businessId: businessId.value } });
 };
 
 const removeUserAddress = (daId) => {

@@ -38,13 +38,13 @@ const deleteBusiness = (businessId, event) => {
 
 const toEditBusiness = (businessId, event) => {
   event.stopPropagation(); // 阻止事件冒泡
-  router.push({ path: '/editBusiness', query: { businessId: businessId } })
+  router.push({ path: '/business/editBusiness', query: { businessId: businessId } })
 }
 const toBusinessInfo = (businessId) => {
-  router.push({ path: '/businessInfoManage', query: { businessId: businessId } });
+  router.push({ path: '/business/businessInfoManage', query: { businessId: businessId } });
 };
 const toAddBusiness = () => {
-  router.push({ path: '/addBusiness' });
+  router.push({ path: '/business/addBusiness' });
 };
 </script>
 

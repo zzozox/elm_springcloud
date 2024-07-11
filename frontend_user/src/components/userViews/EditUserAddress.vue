@@ -49,7 +49,7 @@ const editUserAddress = () => {
     address:deliveryAddress.value.address,
     userId:user.value.id},()=>{
     ElMessage.success('修改地址成功')
-    router.push({path:'/userAddress',query:{businessId:businessId.value}});})
+    router.push({path:'/user/userAddress',query:{businessId:businessId.value}});})
 };
 </script>
 

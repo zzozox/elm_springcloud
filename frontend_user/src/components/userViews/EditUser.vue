@@ -54,7 +54,7 @@ const editAccount = () => {
     delTag: account.value.delTag
   }, () => {
     ElMessage.success('修改用户信息成功');
-    router.push({ path: '/logout'});
+    router.push({ path: '/user/logout'});
   });
 };
 

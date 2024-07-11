@@ -43,9 +43,9 @@ const toBusinessList = (orderTypeId) => {
 
 const toBusinessInfo = (businessId, userId) => {
   if (user.value && userId === user.value.id) {
-    router.push({ path: '/businessInfoManage', query: { businessId: businessId } });
+    router.push({ path: '/business/businessInfoManage', query: { businessId: businessId } });
   } else {
-    router.push({ path: '/businessInfoLook', query: { businessId: businessId } });
+    router.push({ path: '/business/businessInfoLook', query: { businessId: businessId } });
   }
 };
 

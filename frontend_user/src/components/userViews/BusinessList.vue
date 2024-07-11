@@ -50,7 +50,7 @@ const listCart = async () => {
   }
 };
 const toBusinessInfo = (businessId) => {
-  router.push({ path: '/businessInfo', query: { businessId: businessId } });
+  router.push({ path: '/user/businessInfo', query: { businessId: businessId } });
 };
 </script>
 

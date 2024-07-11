@@ -61,7 +61,7 @@ const payOrder=()=>{
       (data)=>{
           ElMessage.success('支付成功');
           router.push({
-            path: '/index',
+            path: '/user/index',
           });
       })
 }

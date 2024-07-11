@@ -1,6 +1,6 @@
 <template>
   <ul class="footer">
-    <li @click="router.push('/index')">
+    <li @click="router.push('/user/index')">
       <el-icon><HomeFilled /></el-icon>
       <p>首页</p>
     </li>
@@ -8,7 +8,7 @@
       <el-icon><View /></el-icon>
       <p>发现</p>
     </li>
-    <li @click="router.push('/orderList')">
+    <li @click="router.push('/user/orderList')">
       <el-icon><Fold /></el-icon>
       <p>订单</p>
     </li>
@@ -27,7 +27,7 @@ const toMe=()=>{
   if(unauthorized()){
     router.push('/login');
   }else {
-    router.push('/logout')
+    router.push('/user/logout')
   }
 }
 </script>-->

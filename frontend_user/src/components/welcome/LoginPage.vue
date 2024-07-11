@@ -27,9 +27,9 @@ function userLogin() {
       login(form.username, form.password, form.remember, (data) => {
         if(data && data.role) {
           if(data.role === 'user'){
-            router.push("/index")
+            router.push("/user/index")
           } else if(data.role === 'business'){
-            router.push("/businessIndex")
+            router.push("/business/businessIndex")
           } else {
             console.error("Unknown role:", data.role);
           }

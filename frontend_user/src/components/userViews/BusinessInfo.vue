@@ -102,7 +102,7 @@ const removeCart = (index) => {
 };
 
 const toOrder = () => {
-  router.push({ path: '/orders', query: { businessId: businessId.value } });
+  router.push({ path: '/user/orders', query: { businessId: businessId.value } });
 };
 
 // 计算属性

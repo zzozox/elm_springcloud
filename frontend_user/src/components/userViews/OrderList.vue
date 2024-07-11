@@ -57,7 +57,7 @@ const detailetShow = (item) => {
 
 const toPay = (id) => {
   router.push({
-    path: '/payment',
+    path: '/user/payment',
     query: {
       orderId: id
     }

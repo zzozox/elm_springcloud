@@ -51,7 +51,7 @@ const addFood = () => {
     remarks:food.value.remarks,
   }, () => {
     ElMessage.success('新增食品成功')
-    router.push({ path: '/businessInfoManage', query: { businessId: food.value.businessId } });
+    router.push({ path: '/business/businessInfoManage', query: { businessId: food.value.businessId } });
   })
 };
 

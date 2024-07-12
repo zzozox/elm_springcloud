@@ -3,14 +3,14 @@ package com.example.order_provider_13011.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cart_provider_13009.mapper.CartMapper;
 import com.example.common.entity.dto.Cart;
 import com.example.common.entity.dto.OrderDetailet;
 import com.example.common.entity.dto.Orders;
 import com.example.common.entity.vo.request.order.OrderVo;
+import com.example.order_provider_13011.mapper.CartMapper;
+import com.example.order_provider_13011.mapper.OrderDetailetMapper;
 import com.example.order_provider_13011.mapper.OrdersMapper;
 import com.example.order_provider_13011.service.OrdersService;
-import com.example.orderdetailet_provider_13013.mapper.OrderDetailetMapper;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 

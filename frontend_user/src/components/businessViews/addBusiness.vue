@@ -99,7 +99,7 @@ const handleImageChange = (event) => {
   <div class="wrapper">
     <!-- header部分 -->
     <header>
-      <p>编辑门店信息</p>
+      <p>新建门店</p>
     </header>
     <!-- 表单部分 -->
     <ul class="form-box">

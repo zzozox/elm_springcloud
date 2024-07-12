@@ -142,7 +142,7 @@ public class AuthorizeController {
 
     /**
      * 修改用户信息
-     * @param vo
+     * @param account
      * @return
      */
     @PostMapping("/updateUser")

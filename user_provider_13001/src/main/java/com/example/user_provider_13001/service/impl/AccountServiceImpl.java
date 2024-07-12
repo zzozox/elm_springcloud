@@ -2,19 +2,16 @@ package com.example.user_provider_13001.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.common.entity.dto.Account;
 import com.example.common.entity.vo.request.account.ConfirmResetVO;
 import com.example.common.entity.vo.request.account.EmailRegisterVO;
 import com.example.common.entity.vo.request.account.EmailResetVO;
-import com.example.common.entity.vo.request.account.UpdataAccountVo;
 import com.example.common.utils.Const;
 import com.example.common.utils.FlowUtils;
 import com.example.user_provider_13001.mapper.AccountMapper;
 import com.example.user_provider_13001.service.AccountService;
 import jakarta.annotation.Resource;
-import jakarta.validation.Valid;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;

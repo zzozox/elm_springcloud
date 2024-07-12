@@ -22,6 +22,9 @@ jar {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("D:/Maven/apache-maven-3.9.0-bin/apache-maven-3.9.0/maven_repository")
+    }
 }
 
 ext {
@@ -29,9 +32,7 @@ ext {
 }
 
 dependencies {
-    implementation project(':common')
-    implementation project(':cart_provider_13009')
-    implementation project(':orderdetailet_provider_13013')
+    implementation 'com.example:common:0.0.1-SNAPSHOT'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

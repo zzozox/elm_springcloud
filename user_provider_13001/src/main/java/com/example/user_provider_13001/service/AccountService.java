@@ -5,8 +5,6 @@ import com.example.common.entity.dto.Account;
 import com.example.common.entity.vo.request.account.ConfirmResetVO;
 import com.example.common.entity.vo.request.account.EmailRegisterVO;
 import com.example.common.entity.vo.request.account.EmailResetVO;
-import com.example.common.entity.vo.request.account.UpdataAccountVo;
-import jakarta.validation.Valid;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface AccountService extends IService<Account>, UserDetailsService {
